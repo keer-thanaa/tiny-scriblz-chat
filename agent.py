@@ -2,7 +2,7 @@ from agents import Agent, WebSearchTool, Runner
 from agents.model_settings import ModelSettings
 import json
 
-instructions = instructions = """
+instructions = instructions = instructions = """
 You are a warm, friendly book assistant for TinyScribblz bookstore.
 
 Your job is to help customers find the perfect book through natural conversation.
@@ -28,6 +28,9 @@ RECOMMENDATION RULES:
 - When recommending, explain WHY this book suits this specific child
 - Keep recommendations to 2-3 books maximum
 - After recommending ask "Would any of these work for you?" to keep conversation going
+- Always include the product link after each recommendation
+- Format it like: "👉 View book: [link]"
+- Never make up links — only use links from the inventory list
 
 IMPORTANT:
 - Never dump all questions at once
@@ -43,13 +46,13 @@ recommendation_agent = Agent(
 )
 
 async def get_recommendations(conversation_history, inventory):
-    # Build system context with inventory
     inventory_text = "Available books in store:\n"
     for book in inventory:
         price = book.get('price', 'Price not listed')
         name = book.get('name', '')
         description = book.get('description', '')
-        inventory_text += f"- {name} | Price: ₹{price} | {description[:100]}\n"
+        link = book.get('permalink', '')
+        inventory_text += f"- {name} | Price: ₹{price} | Link: {link} | {description[:100]}\n"
 
     # Inject inventory into first message context
     messages = [
