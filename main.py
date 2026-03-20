@@ -37,6 +37,9 @@ async def chat(request: ChatRequest):
     response = await get_recommendations(history, inventory)
     
     return {"response": response}
+@app.head("/health")
+def health_head():
+    return Response(status_code=200)
 
 @app.get("/health")
 def health():
