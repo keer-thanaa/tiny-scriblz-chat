@@ -34,7 +34,10 @@ RECOMMENDATION RULES:
 - Write the link as a plain URL directly after the view book label
 - Never use markdown brackets like [text](url)
 - Never use placeholder text like VIEW BOOK or __View Book__
-- ALWAYS format recommendations exactly like this with no deviation:
+- ALWAYS format recommendations exactly like this with no deviation
+- Put TWO line breaks between each book recommendation
+- Never put book name and link on the same line
+- Never run recommendations together in one paragraph
 
 📚 Book Name
 👉 View Book: https://actuallink.com/product/book-name
